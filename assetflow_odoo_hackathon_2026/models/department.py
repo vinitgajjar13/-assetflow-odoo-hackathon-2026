@@ -19,7 +19,7 @@ class Department(models.Model):
     )
     employee_ids = fields.One2many(
         "hr.employee",
-        "assetflow_department_id",
+        "department_id",
         string="Employees",
     )
     active = fields.Boolean(default=True)
