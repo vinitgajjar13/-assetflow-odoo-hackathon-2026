@@ -1,0 +1,33 @@
+# AssetFlow
+
+Enterprise Asset & Resource Management System
+
+## Technology
+
+- Odoo 19
+- Python 3.11
+- PostgreSQL 17
+
+## Features
+
+- Department Management
+- Employee Directory
+- Asset Registration
+- Asset Allocation
+- Asset Transfer
+- Resource Booking
+- Maintenance Workflow
+- Asset Audit
+- Dashboard
+- Notifications
+
+## Team
+
+Team Name:
+Team Members:
+
+## Installation
+
+1. Copy module to custom_addons
+2. Update Apps List
+3. Install AssetFlow
