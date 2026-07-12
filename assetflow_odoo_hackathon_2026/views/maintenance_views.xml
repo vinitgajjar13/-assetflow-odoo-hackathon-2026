@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_maintenance_tree" model="ir.ui.view">
+        <field name="name">wb.maintenance.tree</field>
+        <field name="model">wb.maintenance</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="asset_id"/>
+                <field name="employee_id"/>
+                <field name="request_date"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_maintenance_form" model="ir.ui.view">
+        <field name="name">wb.maintenance.form</field>
+        <field name="model">wb.maintenance</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+
+                    <group>
+                        <field name="asset_id"/>
+                        <field name="employee_id"/>
+                    </group>
+
+                    <group>
+                        <field name="request_date"/>
+                        <field name="completion_date"/>
+                        <field name="state"/>
+                    </group>
+
+                    <group>
+                        <field name="issue"/>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+        <record id="action_maintenance" model="ir.actions.act_window">
+        <field name="name">Maintenance</field>
+        <field name="res_model">wb.maintenance</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+        <menuitem
+        id="menu_maintenance"
+        name="Maintenance"
+        parent="menu_asset_root"
+        action="action_maintenance"
+        sequence="6"/>
+</odoo>

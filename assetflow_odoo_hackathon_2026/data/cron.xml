@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Check Overdue Asset Returns -->
+
+    <record id="ir_cron_overdue_asset_returns"
+            model="ir.cron">
+
+        <field name="name">
+            Check Overdue Asset Returns
+        </field>
+
+        <field name="model_id"
+               ref="model_assetflow_asset_allocation"/>
+
+        <field name="state">code</field>
+
+        <field name="code">
+model.cron_check_overdue_returns()
+        </field>
+
+        <field name="interval_number">1</field>
+
+        <field name="interval_type">days</field>
+
+        <field name="numbercall">-1</field>
+
+        <field name="active">True</field>
+
+    </record>
+
+
+    <!-- Upcoming Booking Reminder -->
+
+    <record id="ir_cron_booking_reminder"
+            model="ir.cron">
+
+        <field name="name">
+            Booking Reminder
+        </field>
+
+        <field name="model_id"
+               ref="model_assetflow_booking"/>
+
+        <field name="state">code</field>
+
+        <field name="code">
+model.cron_booking_reminder()
+        </field>
+
+        <field name="interval_number">1</field>
+
+        <field name="interval_type">hours</field>
+
+        <field name="numbercall">-1</field>
+
+        <field name="active">True</field>
+
+    </record>
+
+
+    <!-- Maintenance Reminder -->
+
+    <record id="ir_cron_maintenance"
+            model="ir.cron">
+
+        <field name="name">
+            Maintenance Reminder
+        </field>
+
+        <field name="model_id"
+               ref="model_assetflow_maintenance"/>
+
+        <field name="state">code</field>
+
+        <field name="code">
+model.cron_maintenance_due()
+        </field>
+
+        <field name="interval_number">1</field>
+
+        <field name="interval_type">days</field>
+
+        <field name="numbercall">-1</field>
+
+        <field name="active">True</field>
+
+    </record>
+
+</odoo>

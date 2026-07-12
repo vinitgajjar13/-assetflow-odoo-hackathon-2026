@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- List View -->
+    <record id="view_asset_list" model="ir.ui.view">
+        <field name="name">assetflow.asset.list</field>
+        <field name="model">assetflow.asset</field>
+        <field name="arch" type="xml">
+            <list string="Assets">
+                <field name="asset_code"/>
+                <field name="name"/>
+                <field name="category_id"/>
+                <field name="serial_no"/>
+                <field name="employee_id"/>
+                <field name="purchase_date"/>
+                <field name="purchase_cost" optional="hide"/>
+                <field name="status" widget="badge"
+                       decoration-success="status == 'available'"
+                       decoration-info="status == 'allocated'"
+                       decoration-warning="status == 'maintenance'"
+                       decoration-danger="status == 'lost'"
+                       decoration-muted="status in ('retired', 'disposed')"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_asset_form" model="ir.ui.view">
+        <field name="name">assetflow.asset.form</field>
+        <field name="model">assetflow.asset</field>
+        <field name="arch" type="xml">
+            <form string="Asset">
+                <header>
+                    <button name="action_request_transfer" type="object" string="Request Transfer" class="oe_highlight" invisible="status != 'allocated'"/>
+                    <field name="status" widget="statusbar" statusbar_visible="available,allocated,maintenance"/>
+                </header>
+                <sheet>
+                    <field name="image" widget="image" class="oe_avatar" options="{'zoom': true, 'preview_image': 'image'}"/>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. MacBook Pro M3"/>
+                        </h1>
+                        <h3>
+                            <field name="asset_code"/>
+                        </h3>
+                    </div>
+                    <group>
+                        <group string="Specifications">
+                            <field name="category_id" options="{'no_create': True}"/>
+                            <field name="serial_no"/>
+                        </group>
+                        <group string="Financials &amp; Assignment">
+                            <field name="purchase_date"/>
+                            <field name="purchase_cost"/>
+                            <field name="employee_id" options="{'no_create': True}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Allocation Logs" name="allocations">
+                            <field name="allocation_ids" readonly="1">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="employee_id"/>
+                                    <field name="allocation_date"/>
+                                    <field name="expected_return_date"/>
+                                    <field name="actual_return_date"/>
+                                    <field name="state" widget="badge" decoration-success="state == 'allocated'" decoration-muted="state == 'returned'"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Maintenance History" name="maintenance">
+                            <field name="maintenance_ids" readonly="1">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="technician"/>
+                                    <field name="maintenance_date"/>
+                                    <field name="cost"/>
+                                    <field name="state" widget="badge" decoration-warning="state == 'progress'" decoration-success="state == 'done'"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Audit History" name="audits">
+                            <field name="audit_line_ids" readonly="1">
+                                <list>
+                                    <field name="cycle_id"/>
+                                    <field name="status" widget="badge" decoration-success="status == 'verified'" decoration-danger="status == 'missing'"/>
+                                    <field name="remarks"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Change Log" name="history">
+                            <field name="history_ids" readonly="1">
+                                <list>
+                                    <field name="date"/>
+                                    <field name="user_id"/>
+                                    <field name="action"/>
+                                    <field name="previous_status"/>
+                                    <field name="current_status"/>
+                                    <field name="remarks"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Internal Notes" name="notes">
+                            <field name="note" placeholder="Add custom notes here..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_asset_search" model="ir.ui.view">
+        <field name="name">assetflow.asset.search</field>
+        <field name="model">assetflow.asset</field>
+        <field name="arch" type="xml">
+            <search string="Search Assets">
+                <field name="name"/>
+                <field name="asset_code"/>
+                <field name="serial_no"/>
+                <field name="category_id"/>
+                <field name="employee_id"/>
+                <filter string="Available" name="available" domain="[('status', '=', 'available')]"/>
+                <filter string="Allocated" name="allocated" domain="[('status', '=', 'allocated')]"/>
+                <filter string="Under Maintenance" name="maintenance" domain="[('status', '=', 'maintenance')]"/>
+                <filter string="Lost" name="lost" domain="[('status', '=', 'lost')]"/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Category" name="group_by_category" context="{'group_by': 'category_id'}"/>
+                    <filter string="Employee" name="group_by_employee" context="{'group_by': 'employee_id'}"/>
+                    <filter string="Status" name="group_by_status" context="{'group_by': 'status'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_asset" model="ir.actions.act_window">
+        <field name="name">Assets</field>
+        <field name="res_model">assetflow.asset</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_asset_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Register a new Asset.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_assetflow_asset"
+              name="Assets"
+              parent="menu_assetflow_root"
+              action="action_asset"
+              sequence="15"/>
+
+</odoo>

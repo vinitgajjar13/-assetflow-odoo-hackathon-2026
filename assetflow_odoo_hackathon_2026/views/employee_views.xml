@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- List View -->
+    <record id="view_employee_list_assetflow" model="ir.ui.view">
+        <field name="name">assetflow.employee.list</field>
+        <field name="model">hr.employee</field>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <list string="Employees">
+                <field name="employee_code"/>
+                <field name="name"/>
+                <field name="assetflow_department_id"/>
+                <field name="job_title"/>
+                <field name="work_email"/>
+                <field name="asset_role"/>
+                <field name="status" widget="badge" decoration-success="status == 'active'" decoration-danger="status == 'inactive'"/>
+                <field name="allocated_asset_count"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_employee_form_assetflow" model="ir.ui.view">
+        <field name="name">assetflow.employee.form</field>
+        <field name="model">hr.employee</field>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <form string="Employee">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_allocated_assets"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-laptop">
+                            <field name="allocated_asset_count" widget="statinfo" string="Assets"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" placeholder="Employee Name" required="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Organizational">
+                            <field name="employee_code"/>
+                            <field name="assetflow_department_id" options="{'no_create': True}"/>
+                            <field name="job_title"/>
+                            <field name="asset_role"/>
+                        </group>
+                        <group string="Contact &amp; Status">
+                            <field name="work_email"/>
+                            <field name="work_phone"/>
+                            <field name="status" widget="radio" options="{'horizontal': true}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Allocated Assets" name="allocated_assets">
+                            <field name="allocated_asset_ids" readonly="1">
+                                <list>
+                                    <field name="asset_id"/>
+                                    <field name="allocation_date"/>
+                                    <field name="expected_return_date"/>
+                                    <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state == 'allocated'" decoration-muted="state == 'returned'"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_employee_search_assetflow" model="ir.ui.view">
+        <field name="name">assetflow.employee.search</field>
+        <field name="model">hr.employee</field>
+        <field name="arch" type="xml">
+            <search string="Search Employees">
+                <field name="employee_code"/>
+                <field name="name"/>
+                <field name="assetflow_department_id"/>
+                <field name="asset_role"/>
+                <field name="status"/>
+                <filter string="Active" name="active_employees" domain="[('status', '=', 'active')]"/>
+                <filter string="Inactive" name="inactive_employees" domain="[('status', '=', 'inactive')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Department" name="group_by_department" context="{'group_by': 'assetflow_department_id'}"/>
+                    <filter string="AssetFlow Role" name="group_by_role" context="{'group_by': 'asset_role'}"/>
+                    <filter string="Status" name="group_by_status" context="{'group_by': 'status'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_employee_directory" model="ir.actions.act_window">
+        <field name="name">Employee Directory</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_employee_search_assetflow"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_employee_list_assetflow')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_employee_form_assetflow')})]"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Register a new Employee in the directory.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_employee_directory"
+              name="Employees"
+              parent="menu_assetflow_root"
+              action="action_employee_directory"
+              sequence="20"/>
+
+</odoo>

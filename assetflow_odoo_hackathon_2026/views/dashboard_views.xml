@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_dashboard_form" model="ir.ui.view">
+        <field name="name">assetflow.dashboard.form</field>
+        <field name="model">assetflow.dashboard</field>
+        <field name="arch" type="xml">
+
+            <form string="Dashboard" create="false" edit="false">
+
+                <sheet>
+
+                    <group col="3">
+
+                        <group string="Assets">
+
+                            <field name="assets_available" readonly="1"/>
+
+                            <field name="assets_allocated" readonly="1"/>
+
+                        </group>
+
+                        <group string="Maintenance">
+
+                            <field name="maintenance_today" readonly="1"/>
+
+                        </group>
+
+                        <group string="Bookings">
+
+                            <field name="active_bookings" readonly="1"/>
+
+                        </group>
+
+                    </group>
+
+                    <group col="2">
+
+                        <group>
+
+                            <field name="pending_transfers" readonly="1"/>
+
+                        </group>
+
+                        <group>
+
+                            <field name="upcoming_returns" readonly="1"/>
+
+                        </group>
+
+                    </group>
+
+                </sheet>
+
+            </form>
+
+        </field>
+    </record>
+
+
+    <record id="action_dashboard" model="ir.actions.act_window">
+
+        <field name="name">Dashboard</field>
+
+        <field name="res_model">assetflow.dashboard</field>
+
+        <field name="view_mode">form</field>
+
+        <field name="target">current</field>
+
+    </record>
+
+
+    <menuitem
+        id="menu_dashboard"
+        name="Dashboard"
+        parent="assetflow_root_menu"
+        action="action_dashboard"
+        sequence="1"/>
+
+</odoo>

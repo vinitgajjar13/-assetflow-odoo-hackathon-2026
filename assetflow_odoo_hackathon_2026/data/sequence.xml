@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Department -->
+    <record id="seq_department" model="ir.sequence">
+        <field name="name">Department</field>
+        <field name="code">assetflow.department</field>
+        <field name="prefix">DEPT-</field>
+        <field name="padding">3</field>
+        <field name="number_increment">1</field>
+    </record>
+
+    <!-- Asset -->
+    <record id="seq_asset" model="ir.sequence">
+        <field name="name">Asset</field>
+        <field name="code">assetflow.asset</field>
+        <field name="prefix">AF-</field>
+        <field name="padding">4</field>
+        <field name="number_increment">1</field>
+    </record>
+
+    <!-- Employee -->
+    <record id="seq_employee" model="ir.sequence">
+        <field name="name">Employee</field>
+        <field name="code">assetflow.employee</field>
+        <field name="prefix">EMP-</field>
+        <field name="padding">4</field>
+        <field name="number_increment">1</field>
+    </record>
+
+    <!-- Allocation -->
+    <record id="seq_allocation" model="ir.sequence">
+        <field name="name">Allocation</field>
+        <field name="code">assetflow.allocation</field>
+        <field name="prefix">AL-</field>
+        <field name="padding">4</field>
+        <field name="number_increment">1</field>
+    </record>
+
+    <!-- Booking -->
+    <record id="seq_booking" model="ir.sequence">
+        <field name="name">Booking</field>
+        <field name="code">assetflow.booking</field>
+        <field name="prefix">BK-</field>
+        <field name="padding">4</field>
+        <field name="number_increment">1</field>
+    </record>
+
+    <!-- Maintenance -->
+    <record id="seq_maintenance" model="ir.sequence">
+        <field name="name">Maintenance</field>
+        <field name="code">assetflow.maintenance</field>
+        <field name="prefix">MT-</field>
+        <field name="padding">4</field>
+        <field name="number_increment">1</field>
+    </record>
+
+    <!-- Transfer -->
+    <record id="seq_transfer" model="ir.sequence">
+        <field name="name">Transfer</field>
+        <field name="code">assetflow.transfer</field>
+        <field name="prefix">TR-</field>
+        <field name="padding">4</field>
+        <field name="number_increment">1</field>
+    </record>
+
+    <!-- Audit -->
+    <record id="seq_audit" model="ir.sequence">
+        <field name="name">Audit</field>
+        <field name="code">assetflow.audit</field>
+        <field name="prefix">AU-</field>
+        <field name="padding">4</field>
+        <field name="number_increment">1</field>
+    </record>
+
+</odoo>

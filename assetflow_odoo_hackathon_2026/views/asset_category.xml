@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- List View -->
+    <record id="view_asset_category_list" model="ir.ui.view">
+        <field name="name">assetflow.asset.category.list</field>
+        <field name="model">assetflow.asset.category</field>
+        <field name="arch" type="xml">
+            <list string="Asset Categories">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="warranty_period"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_asset_category_form" model="ir.ui.view">
+        <field name="name">assetflow.asset.category.form</field>
+        <field name="model">assetflow.asset.category</field>
+        <field name="arch" type="xml">
+            <form string="Asset Category">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Laptops"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code" placeholder="e.g. LAP"/>
+                            <field name="warranty_period"/>
+                        </group>
+                        <group>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </group>
+                    <group string="Description">
+                        <field name="description" nolabel="1" placeholder="Category description..."/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_asset_category_search" model="ir.ui.view">
+        <field name="name">assetflow.asset.category.search</field>
+        <field name="model">assetflow.asset.category</field>
+        <field name="arch" type="xml">
+            <search string="Search Asset Categories">
+                <field name="name"/>
+                <field name="code"/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_asset_category" model="ir.actions.act_window">
+        <field name="name">Asset Categories</field>
+        <field name="res_model">assetflow.asset.category</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_asset_category_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Asset Category.
+            </p>
+            <p>
+                Categories help organize assets (e.g. Laptops, Vehicles, Furniture).
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_assetflow_asset_category"
+              name="Asset Categories"
+              parent="menu_assetflow_config"
+              action="action_asset_category"
+              sequence="20"/>
+
+</odoo>

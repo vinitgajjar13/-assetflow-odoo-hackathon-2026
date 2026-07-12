@@ -1,33 +1,39 @@
 {
-    'name': "assetflow_odoo_hackathon_2026",
-
-    'summary': "Short (1 phrase/line) summary of the module's purpose",
-
-    'description': """
-Long description of module's purpose
+    "name": "AssetFlow",
+    "summary": "Enterprise Asset & Resource Management System",
+    "description": """
+        AssetFlow is a production-ready Enterprise Asset & Resource Management System.
+        Includes Organization, Asset Registration/Lifecycle, Asset Allocation, Resource Booking,
+        Maintenance, Audit and Dashboard functionalities.
     """,
-
-    'author': "My Company",
-    'website': "https://www.yourcompany.com",
-
-    # Categories can be used to filter modules in modules listing
-    # Check https://github.com/odoo/odoo/blob/15.0/odoo/addons/base/data/ir_module_category_data.xml
-    # for the full list
-    'category': 'Uncategorized',
-    'version': '0.1',
-
-    # any module necessary for this one to work correctly
-    'depends': ['base'],
-
-    # always loaded
-    'data': [
-        # 'security/ir.model.access.csv',
-        'views/views.xml',
-        'views/templates.xml',
+    "author": "Antigravity",
+    "website": "https://www.yourcompany.com",
+    "category": "Asset Management",
+    "version": "1.0",
+    "depends": ["base", "hr", "mail", "stock", "purchase"],
+    
+    "data": [
+        "security/security.xml",
+        "security/ir.model.access.csv",
+        "data/sequence.xml",
+        "data/cron.xml",
+        "report/asset_report.xml",
+        "views/department.xml",
+        "views/asset_category.xml",
+        "views/asset_views.xml",
+        "views/assest_history_views.xml",
+        "views/asset_allocation.xml",
+        "views/booking_views.xml",
+        "views/maintenance_views.xml",
+        "views/audit_views.xml",
+        "views/audit_cycle_views.xml",
+        "views/audit_line_views.xml",
+        "views/dashboard_views.xml",
+        "views/employee_views.xml",
+        "views/notification_views.xml",
+        "views/transfer_views.xml",
     ],
-    # only loaded in demonstration mode
-    'demo': [
-        'demo/demo.xml',
-    ],
+    "installable": True,
+    "application": True,
+    "sequence": 1,
 }
-
