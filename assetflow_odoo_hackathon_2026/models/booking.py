@@ -26,6 +26,7 @@ class Booking(models.Model):
     start_datetime = fields.Datetime(string="Start Date Time")
     end_datetime = fields.Datetime(string="End Date Time")
     purpose = fields.Text(string="Purpose")
+    
     state = fields.Selection(
         [
             ("draft", "Draft"),

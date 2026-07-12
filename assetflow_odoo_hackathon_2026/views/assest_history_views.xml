@@ -54,26 +54,30 @@
     </record>
 
     <!-- Search View -->
-    <record id="view_asset_history_search" model="ir.ui.view">
-        <field name="name">assetflow.asset.history.search</field>
-        <field name="model">assetflow.asset.history</field>
-        <field name="arch" type="xml">
-            <search string="Search Asset History">
-                <field name="asset_id"/>
-                <field name="employee_id"/>
-                <field name="department_id"/>
-                <field name="action"/>
-                <field name="date"/>
-                <group expand="0" string="Group By">
-                    <filter string="Asset" name="group_by_asset" context="{'group_by':'asset_id'}"/>
-                    <filter string="Employee" name="group_by_employee" context="{'group_by':'employee_id'}"/>
-                    <filter string="Department" name="group_by_department" context="{'group_by':'department_id'}"/>
-                    <filter string="Action" name="group_by_action" context="{'group_by':'action'}"/>
-                    <filter string="Date" name="group_by_date" context="{'group_by':'date'}"/>
-                </group>
-            </search>
-        </field>
-    </record>
+<record id="view_asset_history_search" model="ir.ui.view">
+    <field name="name">assetflow.asset.history.search</field>
+    <field name="model">assetflow.asset.history</field>
+    <field name="arch" type="xml">
+        <search string="Asset History">
+            <field name="asset_id"/>
+            <field name="employee_id"/>
+            <field name="action"/>
+            <field name="date"/>
+
+            <filter name="registered"
+                    string="Registered"
+                    domain="[('action','=','registered')]"/>
+
+            <filter name="allocated"
+                    string="Allocated"
+                    domain="[('action','=','allocated')]"/>
+
+            <filter name="returned"
+                    string="Returned"
+                    domain="[('action','=','returned')]"/>
+        </search>
+    </field>
+</record>
 
     <!-- Action -->
     <record id="action_asset_history" model="ir.actions.act_window">

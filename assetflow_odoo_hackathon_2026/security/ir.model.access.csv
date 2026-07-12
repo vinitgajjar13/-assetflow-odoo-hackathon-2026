@@ -35,3 +35,6 @@ access_audit_line_manager,audit.line.manager,model_assetflow_audit_line,group_as
 
 access_dashboard_user,dashboard.user,model_assetflow_dashboard,group_assetflow_employee,1,0,0,0
 access_dashboard_manager,dashboard.manager,model_assetflow_dashboard,group_assetflow_manager,1,0,0,0
+
+access_assetflow_dashboard_user,assetflow.dashboard.user,model_assetflow_dashboard,base.group_user,1,1,1,0
+access_assetflow_dashboard_manager,assetflow.dashboard.manager,model_assetflow_dashboard,base.group_system,1,1,1,1

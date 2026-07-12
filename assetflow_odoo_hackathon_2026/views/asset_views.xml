@@ -116,29 +116,35 @@
     </record>
 
     <!-- Search View -->
-    <record id="view_asset_search" model="ir.ui.view">
-        <field name="name">assetflow.asset.search</field>
-        <field name="model">assetflow.asset</field>
-        <field name="arch" type="xml">
-            <search string="Search Assets">
-                <field name="name"/>
-                <field name="asset_code"/>
-                <field name="serial_no"/>
-                <field name="category_id"/>
-                <field name="employee_id"/>
-                <filter string="Available" name="available" domain="[('status', '=', 'available')]"/>
-                <filter string="Allocated" name="allocated" domain="[('status', '=', 'allocated')]"/>
-                <filter string="Under Maintenance" name="maintenance" domain="[('status', '=', 'maintenance')]"/>
-                <filter string="Lost" name="lost" domain="[('status', '=', 'lost')]"/>
-                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
-                <group expand="0" string="Group By">
-                    <filter string="Category" name="group_by_category" context="{'group_by': 'category_id'}"/>
-                    <filter string="Employee" name="group_by_employee" context="{'group_by': 'employee_id'}"/>
-                    <filter string="Status" name="group_by_status" context="{'group_by': 'status'}"/>
-                </group>
-            </search>
-        </field>
-    </record>
+<record id="view_asset_search" model="ir.ui.view">
+    <field name="name">assetflow.asset.search</field>
+    <field name="model">assetflow.asset</field>
+    <field name="arch" type="xml">
+        <search string="Assets">
+            <field name="name"/>
+            <field name="asset_code"/>
+            <field name="serial_no"/>
+            <field name="category_id"/>
+            <field name="employee_id"/>
+
+            <filter name="available"
+                    string="Available"
+                    domain="[('status','=','available')]"/>
+
+            <filter name="allocated"
+                    string="Allocated"
+                    domain="[('status','=','allocated')]"/>
+
+            <filter name="maintenance"
+                    string="Maintenance"
+                    domain="[('status','=','maintenance')]"/>
+
+            <filter name="lost"
+                    string="Lost"
+                    domain="[('status','=','lost')]"/>
+        </search>
+    </field>
+</record>
 
     <!-- Action -->
     <record id="action_asset" model="ir.actions.act_window">

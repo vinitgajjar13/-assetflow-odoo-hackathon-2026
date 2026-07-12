@@ -41,12 +41,12 @@
                         <page string="Employees" name="employees">
                             <field name="employee_ids" readonly="1">
                                 <list>
-                                    <field name="employee_code"/>
+<!--                                    <field name="employee_code"/>-->
                                     <field name="name"/>
                                     <field name="work_email"/>
                                     <field name="work_phone"/>
-                                    <field name="asset_role"/>
-                                    <field name="status"/>
+<!--                                    <field name="asset_role"/>-->
+<!--                                    <field name="status"/>-->
                                 </list>
                             </field>
                         </page>
@@ -57,21 +57,21 @@
     </record>
 
     <!-- Search View -->
-    <record id="view_department_search" model="ir.ui.view">
-        <field name="name">assetflow.department.search</field>
-        <field name="model">assetflow.department</field>
-        <field name="arch" type="xml">
-            <search string="Search Departments">
-                <field name="name"/>
-                <field name="code"/>
-                <field name="manager_id"/>
-                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
-                <group expand="0" string="Group By">
-                    <filter string="Manager" name="group_by_manager" context="{'group_by': 'manager_id'}"/>
-                </group>
-            </search>
-        </field>
-    </record>
+<record id="view_department_search" model="ir.ui.view">
+    <field name="name">assetflow.department.search</field>
+    <field name="model">assetflow.department</field>
+    <field name="arch" type="xml">
+        <search>
+            <field name="name"/>
+            <filter name="active"
+                    string="Active"
+                    domain="[('active','=',True)]"/>
+            <filter name="inactive"
+                    string="Inactive"
+                    domain="[('active','=',False)]"/>
+        </search>
+    </field>
+</record>
 
     <!-- Action -->
     <record id="action_department" model="ir.actions.act_window">

@@ -19,7 +19,7 @@ class AssetHistory(models.Model):
     )
 
     department_id = fields.Many2one(
-        "assetflow.department",
+        "hr.department",
         string="Department",
     )
 

@@ -47,7 +47,7 @@
                             <field name="allocation_date" readonly="state != 'draft'"/>
                             <field name="expected_return_date" readonly="state != 'draft'"/>
                             <field name="actual_return_date"/>
-                            
+
                         </group>
                     </group>
                     <group string="Notes">
@@ -59,25 +59,29 @@
     </record>
 
     <!-- Search View -->
-    <record id="view_asset_allocation_search" model="ir.ui.view">
-        <field name="name">assetflow.asset.allocation.search</field>
-        <field name="model">assetflow.asset.allocation</field>
-        <field name="arch" type="xml">
-            <search string="Search Allocations">
-                <field name="name"/>
-                <field name="asset_id"/>
-                <field name="employee_id"/>
-                <filter string="Draft" name="draft" domain="[('state', '=', 'draft')]"/>
-                <filter string="Allocated" name="allocated" domain="[('state', '=', 'allocated')]"/>
-                <filter string="Returned" name="returned" domain="[('state', '=', 'returned')]"/>
-                <group expand="0" string="Group By">
-                    <filter string="Asset" name="group_by_asset" context="{'group_by': 'asset_id'}"/>
-                    <filter string="Employee" name="group_by_employee" context="{'group_by': 'employee_id'}"/>
-                    <filter string="Status" name="group_by_status" context="{'group_by': 'state'}"/>
-                </group>
-            </search>
-        </field>
-    </record>
+<record id="view_asset_allocation_search" model="ir.ui.view">
+    <field name="name">assetflow.asset.allocation.search</field>
+    <field name="model">assetflow.asset.allocation</field>
+    <field name="arch" type="xml">
+        <search string="Asset Allocation">
+            <field name="name"/>
+            <field name="asset_id"/>
+            <field name="employee_id"/>
+
+            <filter name="draft"
+                    string="Draft"
+                    domain="[('state','=','draft')]"/>
+
+            <filter name="allocated"
+                    string="Allocated"
+                    domain="[('state','=','allocated')]"/>
+
+            <filter name="returned"
+                    string="Returned"
+                    domain="[('state','=','returned')]"/>
+        </search>
+    </field>
+</record>
 
     <!-- Action -->
     <record id="action_asset_allocation" model="ir.actions.act_window">

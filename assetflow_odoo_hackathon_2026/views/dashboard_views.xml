@@ -74,7 +74,7 @@
     <menuitem
         id="menu_dashboard"
         name="Dashboard"
-        parent="assetflow_root_menu"
+        parent="menu_assetflow_root"
         action="action_dashboard"
         sequence="1"/>
 

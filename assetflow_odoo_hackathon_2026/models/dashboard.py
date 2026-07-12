@@ -36,7 +36,7 @@ class AssetFlowDashboard(models.TransientModel):
             ])
 
             rec.active_bookings = Booking.search_count([
-                ("status", "=", "ongoing")
+                ("state", "=", "approved")
             ])
 
             rec.pending_transfers = Transfer.search_count([

@@ -31,18 +31,19 @@ class Asset(models.Model):
     )
     purchase_date = fields.Date(string="Purchase Date", tracking=True)
     purchase_cost = fields.Float(string="Purchase Cost", tracking=True)
-    status = fields.Selection(
-        [
-            ("available", "Available"),
-            ("allocated", "Allocated"),
-            ("maintenance", "Under Maintenance"),
-            ("lost", "Lost"),
-            ("retired", "Retired"),
-            ("disposed", "Disposed"),
-        ],
+    status = fields.Selection([
+        ("available", "Available"),
+        ("allocated", "Allocated"),
+        ("reserved", "Reserved"),
+        ("maintenance", "Under Maintenance"),
+        ("lost", "Lost"),
+        ("retired", "Retired"),
+        ("disposed", "Disposed"),
+    ],
         default="available",
-        tracking=True,
+        tracking=True
     )
+
     image = fields.Image(string="Asset Image")
     note = fields.Text(string="Internal Notes")
     active = fields.Boolean(default=True, tracking=True)
@@ -123,7 +124,7 @@ class Asset(models.Model):
 
                     self.env["assetflow.asset.history"].create({
                         "asset_id": rec.id,
-                        "employee_id": vals.get("employee_id") or rec.employee_id.id,
+                        "employee_id": vals.get("employee_id") or (rec.employee_id.id if rec.employee_id else False),
                         "action": action,
                         "previous_status": old_status,
                         "current_status": new_status,

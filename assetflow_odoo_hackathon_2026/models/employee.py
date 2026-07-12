@@ -5,24 +5,24 @@ from odoo.exceptions import ValidationError
 class HrEmployee(models.Model):
     _inherit = "hr.employee"
 
-    asset_role = fields.Selection(
-        [
-            ("employee", "Employee"),
-            ("department_head", "Department Head"),
-            ("asset_manager", "Asset Manager"),
-            ("admin", "Administrator"),
-        ],
-        default="employee",
-        string="AssetFlow Role",
-    )
-
-    status = fields.Selection(
-        [
-            ("active", "Active"),
-            ("inactive", "Inactive"),
-        ],
-        default="active",
-    )
+    # asset_role = fields.Selection(
+    #     [
+    #         ("employee", "Employee"),
+    #         ("department_head", "Department Head"),
+    #         ("asset_manager", "Asset Manager"),
+    #         ("admin", "Administrator"),
+    #     ],
+    #     default="employee",
+    #     string="AssetFlow Role",
+    # )
+    #
+    # status = fields.Selection(
+    #     [
+    #         ("active", "Active"),
+    #         ("inactive", "Inactive"),
+    #     ],
+    #     default="active",
+    # )
 
     allocated_asset_ids = fields.One2many(
         "assetflow.asset.allocation",
