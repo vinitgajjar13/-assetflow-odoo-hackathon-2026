@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_assetflow-odoo-hackathon-2026_assetflow-odoo-hackathon-2026,assetflow-odoo-hackathon-2026.assetflow-odoo-hackathon-2026,model_assetflow-odoo-hackathon-2026_assetflow-odoo-hackathon-2026,base.group_user,1,1,1,1
